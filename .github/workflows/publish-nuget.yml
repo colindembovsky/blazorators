@@ -2,7 +2,7 @@ name: publish nuget
 on:
   push:
     tags:
-      - 1.*
+      - 2.*
 
 jobs:
   test:
@@ -25,11 +25,15 @@ jobs:
         - Blazor.SourceGenerators
         - Blazor.Serialization
         - Blazor.LocalStorage.WebAssembly
-        - Blazor.LocalStorage.Server
+        - Blazor.LocalStorage
         - Blazor.SessionStorage.WebAssembly
-        - Blazor.SessionStorage.Server
+        - Blazor.SessionStorage
         - Blazor.Geolocation.WebAssembly
-        - Blazor.Geolocation.Server
+        - Blazor.Geolocation
+        - Blazor.SpeechSynthesis.WebAssembly
+        - Blazor.SpeechSynthesis
+        - Blazor.SpeechRecognition.WebAssembly
+        - Blazor.SpeechRecognition
     steps:
     
     - name: Print tag ref

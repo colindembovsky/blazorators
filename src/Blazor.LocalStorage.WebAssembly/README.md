@@ -1,10 +1,10 @@
 ﻿# Blazorators: The Source Generated `localStorage` JavaScript Interop library for Blazor WebAssembly
 
-The [`Blazor.LocalStorage.WebAssembly`](https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly) package consumes the [`Blazor.SourceGenerators`](https://www.nuget.org/packages/Blazor.SourceGenerators) package. It exposes a source generated `ILocalStorage` interface specific to Blazor WebAssembly and the [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) Web API.
+The [`Blazor.LocalStorage.WebAssembly`](https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly) package consumes the [`Blazor.SourceGenerators`](https://www.nuget.org/packages/Blazor.SourceGenerators) package. It exposes a source generated `IStorageService` interface specific to Blazor WebAssembly and the [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) Web API.
 
 ## Get started
 
-After the NuGet package is added as a reference, call the `AddLocalStorageServices` method to register the `IStorageService` service type.
+After the NuGet package is added as a reference, call the `AddLocalStorageServices` method to register the `ILocalStorageService` service type.
 
 ```csharp
 using Microsoft.AspNetCore.Components.Web;
@@ -25,7 +25,7 @@ builder.Services.AddLocalStorageServices();
 await builder.Build().RunAsync();
 ```
 
-Anywhere needed within your Razor component, or Blazor client code — either `@inject` or `[Inject]` the `IStorageService` type. The interface takes the following shape:
+Anywhere needed within your Razor component, or Blazor client code — either `@inject` or `[Inject]` the `ILocalStorageService` type. The interface takes the following shape:
 
 ```csharp
 using Blazor.Serialization.Extensions;
@@ -37,7 +37,7 @@ namespace Microsoft.JSInterop;
 /// <summary>
 /// Source generated interface definition of the <c>Storage</c> type.
 /// </summary>
-public interface IStorageService
+public interface ILocalStorageService
 {
     /// <summary>
     /// Source generated implementation of <c>window.localStorage.clear</c>.

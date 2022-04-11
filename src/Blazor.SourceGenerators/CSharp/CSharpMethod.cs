@@ -12,12 +12,18 @@ internal record CSharpMethod(
     public bool IsPureJavaScriptInvocation =>
         JavaScriptMethodDependency is { IsPure: true };
 
+    public bool IsNotBiDirectionalJavaScript =>
+        JavaScriptMethodDependency is { IsBiDirectionalJavaScript: false };
+
     public bool IsReturnTypeNullable =>
         RawReturnTypeName.Contains("null");
 
-    public bool IsVoid => RawReturnTypeName == "void";
+    public bool IsVoid => RawReturnTypeName is "void";
 
-    public Dictionary<string, CSharpObject> DependentTypes
+    public Dictionary<string, CSharpObject> DependentTypes { get; init; }
+        = new(StringComparer.OrdinalIgnoreCase);
+
+    public IImmutableSet<(string TypeName, CSharpObject Object)> AllDependentTypes
     {
         get
         {
@@ -41,10 +47,9 @@ internal record CSharpMethod(
                 }
             }
 
-            return dependentTypes;
+            return dependentTypes.Select(kvp => (kvp.Key, kvp.Value))
+                .Concat(this.GetAllDependencies())
+                .ToImmutableHashSet();
         }
     }
-
-    public IImmutableSet<(string TypeName, CSharpObject Object)> AllDependentTypes =>
-        this.GetAllDependencies().ToImmutableHashSet();
 }

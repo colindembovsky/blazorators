@@ -12,10 +12,7 @@ public sealed partial class TodoList
     string? _todoValue;
 
     [Inject]
-    public IStorageService LocalStorage { get; set; } = null!;
-
-    [Inject]
-    public NavigationManager Nav { get; set; } = null!;
+    public ILocalStorageService LocalStorage { get; set; } = null!;
 
     protected override void OnInitialized()
     {
@@ -23,9 +20,9 @@ public sealed partial class TodoList
             .Where(key => key.StartsWith(TodoItem.IdPrefix))
             .Select(key => LocalStorage.GetItem<TodoItem>(key))
             .Where(todo => todo is not null)
-            .ToList()!;
+            .ToList() ?? new();
 
-        _todos = todos;
+        _todos = todos!;
     }
         
 

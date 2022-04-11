@@ -14,7 +14,7 @@ public class LibDomReaderTests
     {
         var stopwatch = Stopwatch.StartNew();
 
-        var sut = new LibDomReader();
+        var sut = TypeDeclarationReader.Default;
         _ = sut.TryGetDeclaration("foo", out var _);
 
         stopwatch.Stop();
@@ -47,15 +47,40 @@ public class LibDomReaderTests
         }
     }
 
-
     [
         Theory,
         MemberData(nameof(TryGetDeclarationInput))
     ]
     public void TryGetDeclarationReturnsCorrectly(string typeName, string expected)
     {
-        var sut = new LibDomReader();
+        var sut = TypeDeclarationReader.Default;
         var result = sut.TryGetDeclaration(typeName, out var actual);
+
+        Assert.True(result);
+        Assert.NotNull(actual);
+        Assert.Equal(expected.NormalizeNewlines(), actual.NormalizeNewlines());
+    }
+
+    public static IEnumerable<object[]> TryGetTypeAliasInput
+    {
+        get
+        {
+            yield return new object[]
+            {
+                "ConnectionType",
+                @"type ConnectionType = ""bluetooth"" | ""cellular"" | ""ethernet"" | ""mixed"" | ""none"" | ""other"" | ""unknown"" | ""wifi"";",
+            };
+        }
+    }
+
+    [
+        Theory,
+        MemberData(nameof(TryGetTypeAliasInput))
+    ]
+    public void TryGetTypeAliasReturnsCorrectly(string typeAlias, string expected)
+    {
+        var sut = TypeDeclarationReader.Default;
+        var result = sut.TryGetTypeAlias(typeAlias, out var actual);
 
         Assert.True(result);
         Assert.NotNull(actual);

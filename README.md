@@ -1,33 +1,49 @@
 <img src="https://raw.githubusercontent.com/IEvangelist/blazorators/main/logo.png" align="right"></img>
 # Blazorators: Blazor C# Source Generators
 
-> Thank you for perusing my Blazor C# Source Generators repository. I'd really appreciate a ⭐ if you find this interesting.
-
-<!-- TODO: Create separate README.md files specific to the NuGet packages. -->
+> Thank you for perusing my Blazor C# Source Generator repository. I'd really appreciate a ⭐ if you find this interesting.
 
 [![build](https://github.com/IEvangelist/blazorators/actions/workflows/build-validation.yml/badge.svg)](https://github.com/IEvangelist/blazorators/actions/workflows/build-validation.yml)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-A C# source generator that creates extensions methods on the Blazor WebAssembly JavaScript implementation of the `IJSInProcessRuntime` type. This library provides several NuGet packages:
+A C# source generator that creates fully functioning Blazor JavaScript interop code, targeting either the `IJSInProcessRuntime` or `IJSRuntime` types. This library provides several NuGet packages:
+
+**Core libraries**
 
 | NuGet package | NuGet version | Description |
 |--|--|--|
 | [`Blazor.SourceGenerators`](https://www.nuget.org/packages/Blazor.SourceGenerators) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SourceGenerators.svg?style=flat)](https://www.nuget.org/packages/Blazor.SourceGenerators) | Core source generator library. |
 | [`Blazor.Serialization`](https://www.nuget.org/packages/Blazor.Serialization) | [![NuGet](https://img.shields.io/nuget/v/Blazor.Serialization.svg?style=flat)](https://www.nuget.org/packages/Blazor.Serialization) | Common serialization library, required in some scenarios when using generics. |
+
+**WebAssembly libraries**
+
+| NuGet package | NuGet version | Description |
+|--|--|--|
 | [`Blazor.LocalStorage.WebAssembly`](https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly) | [![NuGet](https://img.shields.io/nuget/v/Blazor.LocalStorage.WebAssembly.svg?style=flat)](https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly) | Blazor WebAssembly class library exposing DI-ready `IStorageService` type for the `localStorage` implementation (relies on `IJSInProcessRuntime`). |
-| [`Blazor.LocalStorage.Server`](https://www.nuget.org/packages/Blazor.LocalStorage.Server) | [![NuGet](https://img.shields.io/nuget/v/Blazor.LocalStorage.Server.svg?style=flat)](https://www.nuget.org/packages/Blazor.LocalStorage.Server) | Blazor Server class library exposing DI-ready `IStorageService` type for the `localStorage` implementation (relies on `IJSRuntime`) |
 | [`Blazor.SessionStorage.WebAssembly`](https://www.nuget.org/packages/Blazor.SessionStorage.WebAssembly) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SessionStorage.WebAssembly.svg?style=flat)](https://www.nuget.org/packages/Blazor.SessionStorage.WebAssembly) | Blazor WebAssembly class library exposing DI-ready `IStorageService` type for the `sessionStorage` implementation (relies on `IJSInProcessRuntime`). |
-| [`Blazor.SessionStorage.Server`](https://www.nuget.org/packages/Blazor.SessionStorage.Server) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SessionStorage.Server.svg?style=flat)](https://www.nuget.org/packages/Blazor.SessionStorage.Server) | Blazor Server class library exposing DI-ready `IStorageService` type for the `sessionStorage` implementation (relies on `IJSRuntime`) |
 | [`Blazor.Geolocation.WebAssembly`](https://www.nuget.org/packages/Blazor.Geolocation.WebAssembly) | [![NuGet](https://img.shields.io/nuget/v/Blazor.Geolocation.WebAssembly.svg?style=flat)](https://www.nuget.org/packages/Blazor.Geolocation.WebAssembly) | Razor class library exposing DI-ready `IGeolocationService` type (and dependent callback types) for the `geolocation` implementation (relies on `IJSInProcessRuntime`). |
-| [`Blazor.Geolocation.Server`](https://www.nuget.org/packages/Blazor.Geolocation.Server) | [![NuGet](https://img.shields.io/nuget/v/Blazor.Geolocation.Server.svg?style=flat)](https://www.nuget.org/packages/Blazor.Geolocation.Server) | Razor class library exposing DI-ready `IGeolocationService` type (and dependent callback types) for the `geolocation` implementation (relies on `IJSRuntime`). |
+| [`Blazor.SpeechSynthesis.WebAssembly`](https://www.nuget.org/packages/Blazor.SpeechSynthesis.WebAssembly) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SpeechSynthesis.WebAssembly.svg?style=flat)](https://www.nuget.org/packages/Blazor.SpeechSynthesis.WebAssembly) | Razor class library exposing DI-ready `ISpeechSynthesisService` type for the `speechSynthesis` implementation (relies on `IJSInProcessRuntime`). |
+
+> Targets the `IJSInProcessRuntime` type.
+
+**Server libraries**
+
+| NuGet package | NuGet version | Description |
+|--|--|--|
+| [`Blazor.LocalStorage`](https://www.nuget.org/packages/Blazor.LocalStorage) | [![NuGet](https://img.shields.io/nuget/v/Blazor.LocalStorage.svg?style=flat)](https://www.nuget.org/packages/Blazor.LocalStorage) | Blazor Server class library exposing DI-ready `IStorageService` type for the `localStorage` implementation (relies on `IJSRuntime`) |
+| [`Blazor.SessionStorage`](https://www.nuget.org/packages/Blazor.SessionStorage) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SessionStorage.svg?style=flat)](https://www.nuget.org/packages/Blazor.SessionStorage) | Blazor Server class library exposing DI-ready `IStorageService` type for the `sessionStorage` implementation (relies on `IJSRuntime`) |
+| [`Blazor.Geolocation`](https://www.nuget.org/packages/Blazor.Geolocation) | [![NuGet](https://img.shields.io/nuget/v/Blazor.Geolocation.svg?style=flat)](https://www.nuget.org/packages/Blazor.Geolocation) | Razor class library exposing DI-ready `IGeolocationService` type (and dependent callback types) for the `geolocation` implementation (relies on `IJSRuntime`). |
+| [`Blazor.SpeechSynthesis`](https://www.nuget.org/packages/Blazor.SpeechSynthesis) | [![NuGet](https://img.shields.io/nuget/v/Blazor.SpeechSynthesis.svg?style=flat)](https://www.nuget.org/packages/Blazor.SpeechSynthesis) | Razor class library exposing DI-ready `ISpeechSynthesisService` type for the `speechSynthesis` implementation (relies on `IJSRuntime`). |
+
+> Targets the `IJSRuntime` type.
 
 ## Using the `Blazor.SourceGenerators` package 📦
 
 As an example, the official [`Blazor.LocalStorage.WebAssembly`](https://www.nuget.org/packages/Blazor.LocalStorage.WebAssembly) package consumes the [`Blazor.SourceGenerators`](https://www.nuget.org/packages/Blazor.SourceGenerators) package. It exposes extension methods specific to Blazor WebAssembly and the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) Web API.
 
-Consider the IStorageService.cs_ C# file:
+Consider the _IStorageService.cs_ C# file:
 
 ```csharp
 // Copyright (c) David Pine. All rights reserved.
@@ -59,7 +75,7 @@ This code designates itself into the `Microsoft.JSInterop` namespace, making the
 > The generic method descriptors syntax is:
 > `"methodName"` for generic return type and `"methodName:parameterName"` for generic parameter type.
 
-The file needs to define an interface and it needs to be `partial`, for example; `public partial interface`. Decorating the class with the `JSAutoInterop` (or `JSAutoGenericInterop) attribute will source generate the following C# code, as shown in the source generated `IStorageServiceService.g.cs`:
+The file needs to define an interface and it needs to be `partial`, for example; `public partial interface`. Decorating the class with the `JSAutoInterop` (or `JSAutoGenericInterop) attribute will source generate the following C# code, as shown in the source generated _IStorageServiceService.g.cs_:
 
 ```csharp
 using Blazor.Serialization.Extensions;
@@ -213,7 +229,7 @@ public static class LocalStorageServiceCollectionExtensions
 
 Putting this all together, the `Blazor.LocalStorage.WebAssembly` NuGet package is actually less than 15 lines of code, and it generates full DI-ready services with JavaScript interop.
 
-The `Blazor.LocalStorage.Server` package, generates extensions on the `IJSRuntime` type.
+The `Blazor.LocalStorage` package, generates extensions on the `IJSRuntime` type.
 
 ```csharp
 // Copyright (c) David Pine. All rights reserved.
@@ -706,6 +722,13 @@ public sealed partial class ConsumingComponent
 
 <!-- TODO: Add mermaid sequence diagram here -->
 
+## Future work
+
+- https://developer.mozilla.org/en-US/docs/Web/API/CredentialsContainer
+- https://developer.mozilla.org/en-US/docs/Web/API/WakeLock
+- https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hid
+- https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API
+
 ## Known limitations ⚠️
 
 At the time of writing, only pure JavaScript interop is supported. It is a stretch goal to add the following (currently missing) features:
@@ -738,6 +761,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.cnblogs.com/weihanli"><img src="https://avatars.githubusercontent.com/u/7604648?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Weihan Li</b></sub></a><br /><a href="https://github.com/IEvangelist/blazorators/commits?author=WeihanLi" title="Code">💻</a></td>
     <td align="center"><a href="https://www.microsoft.com"><img src="https://avatars.githubusercontent.com/u/7679720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Pine</b></sub></a><br /><a href="https://github.com/IEvangelist/blazorators/commits?author=IEvangelist" title="Code">💻</a> <a href="#design-IEvangelist" title="Design">🎨</a> <a href="https://github.com/IEvangelist/blazorators/pulls?q=is%3Apr+reviewed-by%3AIEvangelist" title="Reviewed Pull Requests">👀</a> <a href="#ideas-IEvangelist" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/IEvangelist/blazorators/commits?author=IEvangelist" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://nimbleapps.cloud"><img src="https://avatars.githubusercontent.com/u/1657085?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Robert McLaws</b></sub></a><br /><a href="https://github.com/IEvangelist/blazorators/commits?author=robertmclaws" title="Code">💻</a> <a href="https://github.com/IEvangelist/blazorators/issues?q=author%3Arobertmclaws" title="Bug reports">🐛</a> <a href="#ideas-robertmclaws" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://colinsalmcorner.com"><img src="https://avatars.githubusercontent.com/u/1932561?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Colin Dembovsky</b></sub></a><br /><a href="#infra-colindembovsky" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-colindembovsky" title="Packaging/porting to new platform">📦</a></td>
+    <td align="center"><a href="http://tanayparikh.com"><img src="https://avatars.githubusercontent.com/u/14852843?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tanay Parikh</b></sub></a><br /><a href="https://github.com/IEvangelist/blazorators/commits?author=TanayParikh" title="Documentation">📖</a></td>
   </tr>
 </table>
 

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) David Pine. All rights reserved.
 // Licensed under the MIT License.
 
-
-
 namespace Blazor.SourceGenerators.Extensions;
 
 static class AttributeSyntaxExtensions
@@ -43,7 +41,15 @@ static class AttributeSyntaxExtensions
                     },
                     nameof(options.GenericMethodDescriptors) => options with
                     {
-                        GenericMethodDescriptors = ParseDescriptors(arg.Expression.ToString())
+                        GenericMethodDescriptors = ParseArray(arg.Expression.ToString())
+                    },
+                    nameof(options.PureJavaScriptOverrides) => options with
+                    {
+                        PureJavaScriptOverrides = ParseArray(arg.Expression.ToString())
+                    },
+                    nameof(options.TypeDeclarationSources) => options with
+                    {
+                        TypeDeclarationSources = ParseArray(arg.Expression.ToString())
                     },
 
                     _ => options
@@ -54,7 +60,7 @@ static class AttributeSyntaxExtensions
         return options;
     }
 
-    static string[]? ParseDescriptors(string args)
+    static string[]? ParseArray(string args)
     {
         var replacedArgs = args
             .Replace("new[]", "")
